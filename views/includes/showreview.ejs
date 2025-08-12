@@ -1,0 +1,26 @@
+<hr>
+
+<div>
+  <h2>All Reviews</h2>
+  <div class="row">
+    <% for (let review of wantedList.reviews) { %>
+      <div class="col-md-6 mb-3">
+        <div class="card h-100 review-card">
+          <div class="card-body reviewcard-body ">
+            
+            <h4 class="card-title"><%= review.author.username%></h4>
+            <p class="starability-result card-text reviewtext" data-rating="<%= review.rating %>"</p>
+            <p class="card-text reviewtext"> <%= review.comment %></p>
+            <% if(currUser && currUser._id.equals(review.author._id)){%>
+            <form class="mb-3" method="Post" action="/listings/<%= wantedList._id %>/review/<%= review._id %>?_method=PUT">
+              <button class="btn btn-danger">Delete</button>
+            </form>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    <% } %>
+    
+  </div>
+
+</div>

@@ -1,0 +1,63 @@
+<% layout("/layouts/boilerplate") %>
+<script>
+     const maptoken="<%= process.env.map_token %>"
+     const coordinates= <%- JSON.stringify(wantedList.geometry.coordinates) %>;
+     
+</script>
+<div class="row mt-2">
+  <div class="col-8 offset-3">
+    <h3><%= wantedList.title %></h3>
+  </div>
+
+  <div class="col-6 offset-3">
+    <div class="card listing-card" style="width: 18rem;">
+      <img src="<%= wantedList.image.url %>" class="card-img-top show-img" alt="Listing-img">
+      <div class="card-body">
+        <p class="card-text">Owned By: <%= wantedList.owner.username %></p>
+        <p class="card-text"><%= wantedList.description %></p>
+        <p class="card-text">
+          &#36;<%= wantedList.price.toLocaleString("en-US") %><br>
+          <%= wantedList.location %><br>
+          <%= wantedList.country %>
+        </p>
+
+        <!-- Arranged Buttons -->
+        <% if(currUser && currUser._id.equals(wantedList.owner._id)) { %>
+        <div class="d-flex justify-content-between">
+          <a href="/listings/<%= wantedList.id %>/edit" class="btn btn-dark btn-sm">Edit</a>
+          <form method="POST" action="/listings/<%= wantedList.id %>?_method=DELETE">
+            <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+          </form>
+        </div>
+        <% } %>
+
+        <!-- Review Section -->
+        <% if(currUser) { %>
+        
+        <div class="col-15" >
+          <%- include('../includes/review.ejs') %>
+        </div>
+         <% } %>
+
+       
+         <% if(wantedList.reviews.length>0){ %>
+          <%- include('../includes/showreview.ejs') %>
+         <%}%>
+         <div class="mt-4">
+          
+          <h3><b>Where you'll be</b></h3>
+          <div id="map"></div>
+        </div>
+        
+      </div>
+    </div>
+  
+  </div>
+  
+</div>
+
+<script src="/js/map.js"></script>
+
+
+
+

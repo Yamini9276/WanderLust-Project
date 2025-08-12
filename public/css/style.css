@@ -1,0 +1,175 @@
+
+body{
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.card-body {
+  width: 100%;      /* Use full container width */
+  max-width: 600px; /* Optional max width to limit stretching */
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+
+.container {
+  padding: 20px 30px; /* Adds space inside container on all sides */
+  max-width: 2000px;  /* Limit max width on big screens */
+  margin: 0 auto;     /* Center horizontally */
+  box-sizing: border-box;
+}
+html, body {
+  overflow-x: hidden;  /* Prevent horizontal scroll */
+}
+
+.container{
+    flex:1;
+}
+.navbar{
+    height:5rem;
+    font-size: 1.2rem;
+    background-color: white;
+}
+.fa-airbnb{
+    color: #fe424d;
+    font-size: 4rem;
+  
+}
+.name{
+    font-size: 2rem;
+    margin-left: 0.5rem;
+    color: #fe424d;
+}
+.navbar-brand{
+    display: flex;
+    align-items: center;
+   
+}
+.nav-link{
+    color: #111111 !important;
+}
+
+/* footer */
+
+.f-info-links a{
+    text-decoration: none;
+    color: #222222;
+}
+.f-info-links a:hover{
+       text-decoration: underline;
+}
+.f-info-links , .f-info-social{
+    width: 100%;
+    
+}
+
+.f-info-social i{
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+}
+.f-info{
+    text-align: center; 
+    height:8rem;
+    background-color: #ebebeb;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items:space-evenly;
+}
+
+/* Cards */
+.listing-card{
+  border: none;
+  margin-bottom: 2rem;
+}
+.card-img-top{
+    border-radius: 1rem;
+    width:100%;
+    object-fit: cover;
+    margin-top: 10px;
+}
+card-body{
+    padding:0;
+}
+.card-text p{
+    font-weight:400 !important;
+}
+#an {
+    text-decoration:none !important;
+    color: #222222;
+}
+
+.card-img-overlay{
+    opacity:0;
+}
+
+.card-img-overlay:hover{
+    opacity:0.2;
+    background-color: white;
+}
+
+.add-btn{
+    background-color: #fe424d;
+    border: none;
+}
+
+/* show image */
+
+.show-img {
+  height: 40vh;
+  width: 80vh;
+  object-fit: cover;
+}
+
+.card-body {
+  width: 80vh;         /* Same width as image */
+  padding: 1rem;       /* Optional spacing */
+}
+
+.card-text {
+  font-size: 1.5rem;
+  line-height: 1.6;
+}
+.review-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;          /* Prevent overflow */
+  word-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;       /* Allow wrapping */
+}
+
+.reviewcard-body {
+  width: 100%;             
+ padding: 1rem;
+} 
+
+.reviewtext {
+  white-space: normal;       /* Wrap text properly */
+  word-break: break-word;    /* Break long words */
+  overflow-wrap: break-word; /* Support breaking */
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.logout{
+  color: white;
+}
+
+
+#map { 
+  height:400px;
+  width:80vh;
+}
+
+.popup {
+  background-color:black;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #333;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}

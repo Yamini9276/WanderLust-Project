@@ -1,0 +1,208 @@
+<style>
+  .btn-search{
+    background-color:#fe424d ;
+    color:#fff;
+    padding: 0 1rem 0 1rem;
+  }
+  .btn-search:hover{
+    background-color:#fe424d ;
+    color:#fff;
+    
+  }
+  .search-input{
+    border-radius: 5px;
+    padding: 0.5rem 3rem 0.5rem 3rem;
+  }
+  .username{
+    border:2px solid black;
+    margin: 1rem;
+  }
+  .container-fluid{
+    display: flex;
+    align-items: center;
+  }
+  /* Reset some basics */
+.navbar {
+  background-color: #ffffff; /* clean white background */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* subtle shadow for depth */
+  padding: 0.5rem 1.5rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Brand styles */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  color: #fe424d; /* your signature red */
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.navbar-brand .fa-airbnb {
+  font-size: 1.8rem;
+  color: #fe424d;
+}
+
+.navbar-brand p.name {
+  margin: 0;
+}
+
+/* Navigation links container */
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  font-size: 1rem;
+}
+
+/* Links */
+.navbar-nav a.nav-link {
+  color: #444;
+  padding: 0.5rem 0.75rem;
+  text-decoration: none;
+  transition: color 0.25s ease;
+  font-weight: 500;
+  border-radius: 4px;
+}
+
+.navbar-nav a.nav-link:hover,
+.navbar-nav a.nav-link.active {
+  color: #fe424d;
+  background-color: rgba(254, 66, 77, 0.1);
+}
+
+/* Search form */
+form.d-flex {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Search input */
+.search-input {
+  border-radius: 25px;
+  padding: 0.5rem 1.5rem;
+  border: 1.5px solid #ddd;
+  width: 220px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #fe424d;
+  box-shadow: 0 0 5px rgba(254, 66, 77, 0.5);
+}
+
+/* Search button */
+.btn-search {
+  background-color: #fe424d;
+  color: #fff;
+  padding: 0.5rem 1.3rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-search:hover {
+  background-color: #d9363d; /* darker red on hover */
+}
+
+/* Username container */
+.username {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border: 2px solid #fe424d;
+  padding: 0.3rem 0.8rem;
+  border-radius: 25px;
+  color: #fe424d;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-left: 1rem;
+}
+
+/* User icon */
+.username i.fa-regular.fa-user {
+  font-size: 1.3rem;
+}
+
+/* Logout button tweaks */
+button.btn-danger {
+  margin-left: 1rem;
+  border-radius: 25px;
+  padding: 0.4rem 1rem;
+  font-weight: 600;
+}
+
+button.btn-danger a.nav-link {
+  color: #fff;
+  text-decoration: none;
+  padding: 0;
+}
+
+button.btn-danger:hover {
+  background-color: #c1272d;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .search-input {
+    width: 150px;
+  }
+  .navbar-nav {
+    gap: 0.8rem;
+  }
+  .username {
+    font-size: 0.9rem;
+    padding: 0.2rem 0.6rem;
+  }
+  button.btn-danger {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+</style>
+
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/listings"><i class="fa-brands fa-airbnb"></i> <p class="name"><b>airbnb</b></p></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link" href="/listings">Explore</a>
+      </div>
+      <div class="navbar-nav ms-auto">
+        <form class="d-flex" role="search">
+          <input class="form-control me-2 search-input" type="search" placeholder="Search destinations" aria-label="Search"/>
+          <button class="btn btn-search" type="submit">Search</button>
+        </form>
+      </div>
+      <div class="navbar-nav ms-auto">
+       
+        <a class="nav-link" href="/listings/new">Airbnb your home</a>
+        <% if(!currUser){ %>
+           <a class="nav-link active" href="/signup"><b>Sign up</b></a>
+           <a class="nav-link" href="/login"><b>Log in</b></a>
+        <% } else{ %>
+           <div class="username">
+             <i class="fa-regular fa-user"></i>
+             <p>Hi! <%= currUser.username%></p>
+           </div>
+          
+           <button type="button" class="btn btn-danger text-white"><a class="nav-link " href="/logout">Log out </a></button>
+        <% } %>
+        
+       
+      </div>
+    </div>
+  </div>
+</nav>
