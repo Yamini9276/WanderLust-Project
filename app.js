@@ -16,10 +16,22 @@ const User = require("./Model/user");
 const userRouter = require("./routes/User.js");
 
 const app = express();
+<<<<<<< HEAD
 const port = 8080;
 
 // View engine setup
 app.engine("ejs", ejsMate);
+=======
+let port = 8080;
+
+app.use((req, res, next) => {
+  console.log("currUser in middleware:", req.user);
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  res.locals.currUser = req.user;
+  next();
+});
+>>>>>>> b015a089b922d9e67a0c9a7de4ead5a1cb1aed60
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
@@ -54,7 +66,12 @@ app.use(session({
     }
 }));
 
+<<<<<<< HEAD
 // Flash messages — must come after session middleware
+=======
+
+ 
+>>>>>>> b015a089b922d9e67a0c9a7de4ead5a1cb1aed60
 app.use(flash());
 
 // Passport.js setup
