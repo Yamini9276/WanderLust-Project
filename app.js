@@ -23,7 +23,14 @@ const wrapAsync = require("./utils/wrapAsync.js");
 
 const app = express();
 let port = 8080;
-    
+
+app.use((req, res, next) => {
+  console.log("currUser in middleware:", req.user);
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  res.locals.currUser = req.user;
+  next();
+});
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
@@ -53,13 +60,7 @@ app.use(session({
     }
 }));
 
-app.use((req, res, next) => {
-  console.log("currUser in middleware:", req.user);
-  res.locals.success = req.flash("success");
-  res.locals.error = req.flash("error");
-  res.locals.currUser = req.user;
-  next();
-});
+
  
 app.use(flash());
 app.use(passport.initialize());
