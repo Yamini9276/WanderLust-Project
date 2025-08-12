@@ -31,7 +31,7 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 
 const store = MongoStore.create({
-    mongoUrl: 'mongodb://localhost/test-app',
+    mongoUrl: process.env.dbUrl,
     crypto: {
         secret: process.env.secret
     },
@@ -71,14 +71,15 @@ app.use(express.static(path.join(__dirname, "/public")));
 app.use("/listings", listingRouter)
 app.use("/listings/:id/review", reviewRouter);
 app.use("/", userRouter);
-
+ 
+console.log(process.env.dbUrl);
 
 main().then(() => {
         console.log("connected to DB");
 }).catch(err => console.log(err));
 
 async function main() {
-    await mongoose.connect('mongodb+srv://Yaminireddy1234567890:AogduRA4ZwdNSYBY@cluster0.p7ul1av.mongodb.net/wanderlust?retryWrites=true&w=majority&appName=Cluster0');
+    await mongoose.connect(process.env.dbUrl);
 }
 
 app.listen(port, () => {
