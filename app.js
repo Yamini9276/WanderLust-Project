@@ -35,22 +35,24 @@ const store = MongoStore.create({
     crypto: {
         secret: process.env.secret
     },
-    touchAfter: 24 * 3600
+    touchAfter: 24 * 3600 // optional
 });
 
-store.on("error", () => {
-    console.log("Error in Mongo sesstion store", err);
-})
+store.on("error", (err) => {
+    console.log("Error in Mongo session store", err);
+});
 
 app.use(session({
+    store,
     secret: process.env.secret,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,  // better for auth sessions
     cookie: {
-        express: Date.now() + 7 * 24 * 60 * 60 * 1000,
+        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
         maxAge: 7 * 24 * 60 * 60 * 1000,
     }
 }));
+
 
  
 app.use(flash());
@@ -72,7 +74,6 @@ app.use("/listings", listingRouter)
 app.use("/listings/:id/review", reviewRouter);
 app.use("/", userRouter);
  
-console.log(process.env.dbUrl);
 
 main().then(() => {
         console.log("connected to DB");
