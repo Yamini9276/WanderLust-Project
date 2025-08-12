@@ -23,7 +23,13 @@ const wrapAsync = require("./utils/wrapAsync.js");
 
 const app = express();
 let port = 8080;
-    
+app.use((req, res, next) => {
+  console.log("currUser in middleware:", req.user);
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  res.locals.currUser = req.user;
+  next();
+});    
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
@@ -47,9 +53,9 @@ app.use(session({
     secret: process.env.secret,
     resave: false,
     saveUninitialized: false,  // better for auth sessions
-    cookie: {
-        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
-        maxAge: 7 * 24 * 60 * 60 * 1000,
+   cookie: {
+    expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+    maxAge: 7 * 24 * 60 * 60 * 1000,
     }
 }));
 
@@ -62,13 +68,7 @@ passport.use(new LocalS(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.use((req, res, next) => {
-  console.log("currUser in middleware:", req.user);
-  res.locals.success = req.flash("success");
-  res.locals.error = req.flash("error");
-  res.locals.currUser = req.user;
-  next();
-});
+
 
 
 app.use(express.static(path.join(__dirname, "/public")));
@@ -88,6 +88,7 @@ async function main() {
 app.listen(port, () => {
         console.log("I am listening");
 })
+
 
 // app.get("/demouser", async (req, res) => {
 //     let fakeuser = new User({
