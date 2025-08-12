@@ -53,7 +53,13 @@ app.use(session({
     }
 }));
 
-
+app.use((req, res, next) => {
+  console.log("currUser in middleware:", req.user);
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  res.locals.currUser = req.user;
+  next();
+});
  
 app.use(flash());
 app.use(passport.initialize());
@@ -62,13 +68,7 @@ passport.use(new LocalS(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.use((req, res, next) => {
-  console.log("currUser in middleware:", req.user);
-  res.locals.success = req.flash("success");
-  res.locals.error = req.flash("error");
-  res.locals.currUser = req.user;
-  next();
-});
+
 
 
 app.use(express.static(path.join(__dirname, "/public")));
